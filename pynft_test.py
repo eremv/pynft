@@ -1,9 +1,11 @@
 import unittest
 import pynft
+import pandas
 
 class nftTest(unittest.TestCase):
 	def test_get_stat_from_empty_file(self):
-		pass
+		stat = pynft.get_stat_from_file('empty.csv')
+		self.assertEquals("Something went wrong", stat["error"])
 
 	def test_get_stat_from_file(self):
 		stat = pynft.get_stat_from_file('correct.csv')
@@ -13,10 +15,12 @@ class nftTest(unittest.TestCase):
 		self.assertEquals(116.6875, stat["mem_avg"])
 
 	def test_get_stat_from_incorrect_file(self):
-		pass
+		stat = pynft.get_stat_from_file('incorrect.csv')
+		self.assertEquals("Something went wrong", stat["error"])
 
 	def test_get_stat_from_missing_file(self):
-		pass
+		stat = pynft.get_stat_from_file('qwerqwer.csv')
+		self.assertEquals("Something went wrong", stat["error"])
 
 if __name__ == "__main__":
 	unittest.main()
